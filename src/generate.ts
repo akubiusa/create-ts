@@ -122,10 +122,17 @@ export function patchDockerWorkflow(
 }
 
 /**
- * Generates .gitignore from the bundled Node.gitignore (which includes a pnpm section), optionally appending a `data/` section.
+ * Generates .gitignore from the bundled Node.gitignore, optionally appending a `data/` section and always excluding Discord bot config.
  */
-export function generateGitignore(ignoreData: boolean): string {
+export function generateGitignore(
+  ignoreData: boolean,
+  variant: ProjectOptions['variant']
+): string {
   let result = readTemplate('gitignore/Node.gitignore')
+
+  if (variant === 'discord-bot') {
+    result += '\n\n# Discord bot configuration\ndata/config.json'
+  }
 
   if (ignoreData) {
     result += '\n\n# データディレクトリ\ndata/'

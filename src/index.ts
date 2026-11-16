@@ -213,7 +213,10 @@ async function main(): Promise<void> {
 
     // generate .gitignore and .node-version (the running Node.js version)
     s.start('.gitignore を生成しています...')
-    const gitignoreContent = generateGitignore(options.ignoreData)
+    const gitignoreContent = generateGitignore(
+      options.ignoreData,
+      options.variant
+    )
     writeFileSync(path.join(outDir, '.gitignore'), gitignoreContent, 'utf8')
 
     const { stdout: nodeVersion } = await execa('node', ['--version'])
