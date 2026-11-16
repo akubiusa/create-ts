@@ -8,7 +8,7 @@
     "preinstall": "npx only-allow pnpm",
     "start": "tsx ./src/main.ts",
     "dev": "tsx watch ./src/main.ts",
-    "test": "jest --runInBand --passWithNoTests --detectOpenHandles --forceExit",
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --runInBand --passWithNoTests --detectOpenHandles --forceExit",
     "lint": "run-z lint:prettier,lint:eslint,lint:tsc",
     "lint:prettier": "prettier --check src/",
     "lint:eslint": "eslint src/ -c eslint.config.mjs",

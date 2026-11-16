@@ -64,6 +64,8 @@ Every project gets `tsconfig.json`, `.prettierrc.yml`, `eslint.config.mjs`, `ren
 
 Inside the generated project, `pnpm run lint`, `pnpm run test` (with `--test`), `pnpm start` and `pnpm run dev` are available.
 
+The `fastify` test script enables Node.js VM modules so Jest can load ESM dependencies used by request injection. It requires Node.js v24.9 or later; the template pins a compatible version in `engines.node`.
+
 ## Development
 
 ```bash
