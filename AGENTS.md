@@ -44,6 +44,8 @@ Run `pnpm lint` and `pnpm test` before committing. Node.js is pinned in `.node-v
 
 `templates/**` is excluded from ESLint (`eslint.config.mjs`), Prettier (`lint:prettier` only checks `src`) and vitest (`vitest.config.ts`). Files there are copied into generated projects and are validated by those projects' own CI. Do not "fix" them to satisfy this repository's lint rules. Each variant's `pnpm-lock.yaml` must match its `package.json`, because the generator runs `pnpm install --frozen-lockfile`.
 
+The Fastify template's test script enables Node.js VM modules for ESM dependencies used by request injection and requires Node.js 24.9 or later (the template pins 26.13.1).
+
 ## Conventions
 
 - ESM only (`"type": "module"`). Local imports use explicit `.js` extensions even for `.ts` sources (`import { readTemplate } from './template.js'`), and Node built-ins use the `node:` prefix.
