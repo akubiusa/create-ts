@@ -185,7 +185,7 @@ describe('patchDockerWorkflow', () => {
 
 describe('generateGitignore', () => {
   it('basic: includes the pnpm section', () => {
-    const result = generateGitignore(false)
+    const result = generateGitignore(false, 'base')
     expect(result).toContain('node_modules/')
     expect(result).toContain('# pnpm')
     expect(result).toContain('pnpm-debug.log*')
@@ -193,10 +193,17 @@ describe('generateGitignore', () => {
   })
 
   it('--ignore-data: additionally appends the data/ section', () => {
-    const result = generateGitignore(true)
+    const result = generateGitignore(true, 'base')
     expect(result).toContain('# pnpm')
     expect(result).toContain('# データディレクトリ')
     expect(result).toContain('data/')
+  })
+
+  it('always ignores the Discord bot configuration file', () => {
+    const result = generateGitignore(false, 'discord-bot')
+    const entries = result.split('\n')
+    expect(entries).toContain('data/config.json')
+    expect(entries).not.toContain('data/')
   })
 })
 
